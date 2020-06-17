@@ -2,8 +2,11 @@ Short information
 -----------------
 MM7D * Air quality measure device
 Copyright (C) 2020 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-- Hardware version: v000000
 - Documentation version: 1.0
 - Documentation licence: CC-BY-NC-4.0
 - Documentation language: en
+- Hardware version: vxxxxxx
+- Software version: v0.1
+- Software licence: EUPL v1.1
+- Software language: en
 - Homepage: <http://www.szerafingomba.hu/softwares/>
