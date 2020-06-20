@@ -20,8 +20,8 @@
 #define TYP_SENSOR1 DHT11
 
 // constanst
-const char* wifi_ssid     = "SzerafinGomba";
-const char* wifi_password = "halacskamacska";
+const char* wifi_ssid     = "";
+const char* wifi_password = "";
 const int   prt_led_act   = 2;
 const int   prt_relay     = 0;
 const int   prt_sensor1   = 12;
