@@ -20,11 +20,13 @@
 #define TYP_SENSOR1 DHT11
 
 // constanst
-const char* wifi_ssid     = "";
-const char* wifi_password = "";
-const int   prt_led_act   = 2;
-const int   prt_relay     = 0;
-const int   prt_sensor1   = 12;
+const char* wifi_ssid     = "SzerafinGomba";
+const char* wifi_password = "halacskamacska";
+const int maxadcvalue     = 1024;
+const int prt_led_act     = 2;
+const int prt_relay       = 0;
+const int prt_sensor1     = 12;
+const int prt_sensor2     = 0;
 const long interval       = 2000;
 const String dev_info1    = "MM7D v0.1 * Air quality measuring device";
 const String dev_info2    = "(C) 2020 Pozsár Zsolt";
@@ -33,7 +35,8 @@ const String dev_info4    = "http://www.szerafingomba.hu/equipments/";
 const String loc_id       = "TH11";
 
 // variables
-float humidity, temperature, co2level;
+float humidity, temperature, unwantedgaslevel;
+int adcvalue              = 0;
 String line;
 String localipaddress;
 unsigned long prevtime1   = 0;
@@ -81,7 +84,7 @@ void setup(void)
            "<hr><b>Plain text data pages:</b><br><br>"
            "<table border=\"0\" cellpadding=\"5\">"
            "<tr><td><a href=\"http://" + localipaddress + "/all\">http://" + localipaddress + "/all</a></td><td>All data with location ID</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/co2level\">http://" + localipaddress + "/co2level</a></td><td>CO<sub>2</sub> level in ppm</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/unwantedgaslevel\">http://" + localipaddress + "/unwantedgaslevel</a></td><td>Level of unwanted gases in %</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/humidity\">http://" + localipaddress + "/humidity</a></td><td>Relative humidity in %</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/temperature\">http://" + localipaddress + "/temperature</a></td><td>Temperature in &deg;C</td></tr>"
            "</table><body></html>";
@@ -92,17 +95,17 @@ void setup(void)
   {
     Serial.println("* HTTP request received.");
     blinkactled();
-    getco2level();
+    getunwantedgaslevel();
     gettemphum();
-    line = loc_id + "\n" + String((int)co2level) + "\n" + String((int)humidity) + "\n" + String((int)temperature);
+    line = loc_id + "\n" + String((int)unwantedgaslevel) + "\n" + String((int)humidity) + "\n" + String((int)temperature);
     server.send(200, "text/plain", line);
   });
-  server.on("/co2level", []()
+  server.on("/unwantedgaslevel", []()
   {
     Serial.println("* HTTP request received.");
     blinkactled();
-    getco2level();
-    line = String((int)co2level);
+    getunwantedgaslevel();
+    line = String((int)unwantedgaslevel);
     server.send(200, "text/plain", line);
   });
   server.on("/humidity", []()
@@ -138,16 +141,21 @@ void blinkactled()
   digitalWrite(prt_led_act, LOW);
 }
 
-// get CO2 level
-void getco2level()
+// get air quality
+void getunwantedgaslevel()
 {
   unsigned long currtime1 = millis();
   if (currtime1 - prevtime1 >= interval)
   {
     prevtime1 = currtime1;
-    Serial.println("* E01: Failed to read CO2 sensor!");
-    co2level = 999;
-    return;
+    adcvalue = analogRead(prt_sensor2);
+    unwantedgaslevel=adcvalue/(maxadcvalue/100);
+    if (unwantedgaslevel > 100)
+    {
+      Serial.println("* E01: Failed to read CO2 sensor!");
+      unwantedgaslevel = 999;
+      return;
+    }
   }
 }
 
