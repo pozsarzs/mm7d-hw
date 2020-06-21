@@ -20,8 +20,8 @@
 #define TYP_SENSOR1 DHT11
 
 // constanst
-const char* wifi_ssid     = "SzerafinGomba";
-const char* wifi_password = "halacskamacska";
+const char* wifi_ssid     = "";
+const char* wifi_password = "";
 const int maxadcvalue     = 1024;
 const int prt_led_act     = 2;
 const int prt_relay       = 0;
@@ -83,15 +83,15 @@ void setup(void)
            "Location: " + loc_id + "<br>"
            "<hr><b>Plain text data pages:</b><br><br>"
            "<table border=\"0\" cellpadding=\"5\">"
-           "<tr><td><a href=\"http://" + localipaddress + "/all\">http://" + localipaddress + "/all</a></td><td>All data with location ID</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/unwantedgaslevel\">http://" + localipaddress + "/unwantedgaslevel</a></td><td>Level of unwanted gases in %</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/humidity\">http://" + localipaddress + "/humidity</a></td><td>Relative humidity in %</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/temperature\">http://" + localipaddress + "/temperature</a></td><td>Temperature in &deg;C</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/all\">http://" + localipaddress + "/get/all</a></td><td>All data with location ID</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/unwantedgaslevel\">http://" + localipaddress + "/get/unwantedgaslevel</a></td><td>Level of unwanted gases in %</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/humidity\">http://" + localipaddress + "/get/humidity</a></td><td>Relative humidity in %</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/temperature\">http://" + localipaddress + "/get/temperature</a></td><td>Temperature in &deg;C</td></tr>"
            "</table><body></html>";
     server.send(200, "text/html", line);
     delay(100);
   });
-  server.on("/all", []()
+  server.on("/get/all", []()
   {
     Serial.println("* HTTP request received.");
     blinkactled();
@@ -100,7 +100,7 @@ void setup(void)
     line = loc_id + "\n" + String((int)unwantedgaslevel) + "\n" + String((int)humidity) + "\n" + String((int)temperature);
     server.send(200, "text/plain", line);
   });
-  server.on("/unwantedgaslevel", []()
+  server.on("/get/unwantedgaslevel", []()
   {
     Serial.println("* HTTP request received.");
     blinkactled();
@@ -108,7 +108,7 @@ void setup(void)
     line = String((int)unwantedgaslevel);
     server.send(200, "text/plain", line);
   });
-  server.on("/humidity", []()
+  server.on("/get/humidity", []()
   {
     Serial.println("* HTTP request received.");
     blinkactled();
@@ -116,7 +116,7 @@ void setup(void)
     line = String((int)humidity);
     server.send(200, "text/plain", line);
   });
-  server.on("/temperature", []()
+  server.on("/get/temperature", []()
   {
     blinkactled();
     gettemphum();
