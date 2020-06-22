@@ -29,7 +29,7 @@ const int prt_sensor1     = 12;
 const int prt_sensor2     = 0;
 const long interval       = 2000;
 const String dev_info1    = "MM7D v0.1 * Air quality measuring device";
-const String dev_info2    = "(C) 2020 Pozsár Zsolt";
+const String dev_info2    = "(C) 2020 Pozsar Zsolt";
 const String dev_info3    = "pozsar.zsolt@szerafingomba.hu";
 const String dev_info4    = "http://www.szerafingomba.hu/equipments/";
 const String loc_id       = "TH11";
@@ -84,7 +84,7 @@ void setup(void)
            "<hr><b>Plain text data pages:</b><br><br>"
            "<table border=\"0\" cellpadding=\"5\">"
            "<tr><td><a href=\"http://" + localipaddress + "/get/all\">http://" + localipaddress + "/get/all</a></td><td>All data with location ID</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/get/unwantedgaslevel\">http://" + localipaddress + "/get/unwantedgaslevel</a></td><td>Level of unwanted gases in %</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/unwantedgaslevel\">http://" + localipaddress + "/get/unwantedgaslevel</a></td><td>Relative level of unwanted gases in %</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/get/humidity\">http://" + localipaddress + "/get/humidity</a></td><td>Relative humidity in %</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/get/temperature\">http://" + localipaddress + "/get/temperature</a></td><td>Temperature in &deg;C</td></tr>"
            "</table><body></html>";
