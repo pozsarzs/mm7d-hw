@@ -232,7 +232,6 @@ void gettemphum()
       Serial.print(msg16);
       digitalWrite(prt_relay, HIGH);
       delay(1000);
-      Serial.println(msg16);
       digitalWrite(prt_relay, LOW);
       Serial.println(msg08);
       temperature = 999;
