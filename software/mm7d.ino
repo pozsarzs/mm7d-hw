@@ -19,20 +19,42 @@
 
 #define TYP_SENSOR1 DHT11
 
-// constanst
-const char* wifi_ssid     = "";
-const char* wifi_password = "";
-const int maxadcvalue     = 1024;
+// settings
+const String loc_id       = "TH11";
+const char* wifi_ssid     = "SzerafinGomba";
+const char* wifi_password = "halacskamacska";
+const String www_username = "username";
+const String www_password = "password";
+
+// GPIO ports
 const int prt_led_act     = 2;
 const int prt_relay       = 0;
 const int prt_sensor1     = 12;
 const int prt_sensor2     = 0;
+
+// messages
+const String msg01        = "MM7D v0.1 * Air quality measuring device";
+const String msg02        = "(C) 2020 Pozsar Zsolt";
+const String msg03        = "pozsar.zsolt@szerafingomba.hu";
+const String msg04        = "http://www.szerafingomba.hu/equipments/";
+const String msg05        = "* Initializing GPIO ports...";
+const String msg06        = "* Initializing sensors...";
+const String msg07        = "* Connecting to wireless network";
+const String msg08        = "OK";
+const String msg09        = "  my IP address:      ";
+const String msg10        = "  subnet mask:        ";
+const String msg11        = "  gateway IP address: ";
+const String msg12        = "* Starting webserver...";
+const String msg13        = "* HTTP request received.";
+const String msg14        = "* E01: Failed to read CO2 sensor!";
+const String msg15        = "* E02: Failed to read T/RH sensor!";
+const String msg16        = "* Resetting T/RH sensor...";
+const String msg17        = "Authentication error!";
+const String msg18        = "* E03: Authentication error!";
+
+// general constants
+const int maxadcvalue     = 1024;
 const long interval       = 2000;
-const String dev_info1    = "MM7D v0.1 * Air quality measuring device";
-const String dev_info2    = "(C) 2020 Pozsar Zsolt";
-const String dev_info3    = "pozsar.zsolt@szerafingomba.hu";
-const String dev_info4    = "http://www.szerafingomba.hu/equipments/";
-const String loc_id       = "TH11";
 
 // variables
 float humidity, temperature, unwantedgaslevel;
@@ -48,38 +70,45 @@ ESP8266WebServer server(80);
 // initializing function
 void setup(void)
 {
-  // initializing ports
-  pinMode(prt_led_act, OUTPUT);
-  pinMode(prt_relay, OUTPUT);
-  digitalWrite(prt_led_act, LOW);
-  digitalWrite(prt_relay, LOW);
-  // initializing sensors
-  dht.begin();
   // setting serial port
   Serial.begin(115200);
   Serial.println("");
   Serial.println("");
-  Serial.println(dev_info1);
-  Serial.println(dev_info2 + " <" + dev_info3 + ">");
+  Serial.println(msg01);
+  Serial.println(msg02 + " <" + msg03 + ">");
+  // initializing ports
+  Serial.print(msg05);
+  pinMode(prt_led_act, OUTPUT);
+  pinMode(prt_relay, OUTPUT);
+  digitalWrite(prt_led_act, LOW);
+  digitalWrite(prt_relay, LOW);
+  Serial.println(msg08);
+  // initializing sensors
+  Serial.print(msg06);
+  dht.begin();
+  Serial.println(msg08);
   // connect to wireless network
-  Serial.print("* Connecting to wireless network");
+  Serial.print(msg07);
   WiFi.begin(wifi_ssid, wifi_password);
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(300);
     Serial.print(".");
   }
-  Serial.println("connected.");
+  Serial.println(msg08);
   localipaddress = WiFi.localIP().toString();
-  Serial.println("* IP address: " + localipaddress);
+  Serial.println(msg09 + localipaddress);
+  Serial.println(msg10 + WiFi.subnetMask().toString());
+  Serial.println(msg11 + WiFi.gatewayIP().toString());
   // start webserver
+  Serial.print(msg12);
   server.on("/", []()
   {
-    Serial.println("* HTTP request received.");
+    Serial.println(msg13);
     blinkactled();
-    line = "<html><head><title>" + dev_info1 + "</title></head>"
-           "<body><b>" + dev_info1 + "</b>""<br>" + dev_info2 + " <a href=\"mailto:" + dev_info3 + "\">" + dev_info3 + "</a><br>"
-           "Homepage: <a href=\"" + dev_info4 + "\">" + dev_info4 + "</a><br><br>"
+    line = "<html><head><title>" + msg01 + "</title></head>"
+           "<body><b>" + msg01 + "</b>""<br>" + msg02 + " <a href=\"mailto:" + msg03 + "\">" + msg03 + "</a><br>"
+           "Homepage: <a href=\"" + msg04 + "\">" + msg04 + "</a><br><br>"
            "Location: " + loc_id + "<br>"
            "<hr><b>Plain text data pages:</b><br><br>"
            "<table border=\"0\" cellpadding=\"5\">"
@@ -87,44 +116,73 @@ void setup(void)
            "<tr><td><a href=\"http://" + localipaddress + "/get/unwantedgaslevel\">http://" + localipaddress + "/get/unwantedgaslevel</a></td><td>Relative level of unwanted gases in %</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/get/humidity\">http://" + localipaddress + "/get/humidity</a></td><td>Relative humidity in %</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/get/temperature\">http://" + localipaddress + "/get/temperature</a></td><td>Temperature in &deg;C</td></tr>"
-           "</table><body></html>";
+           "</table><br>Use <i>username</i> and <i>password</i> arguments!<br><body></html>";
     server.send(200, "text/html", line);
     delay(100);
   });
   server.on("/get/all", []()
   {
-    Serial.println("* HTTP request received.");
+    Serial.println(msg13);
     blinkactled();
-    getunwantedgaslevel();
-    gettemphum();
-    line = loc_id + "\n" + String((int)unwantedgaslevel) + "\n" + String((int)humidity) + "\n" + String((int)temperature);
-    server.send(200, "text/plain", line);
+    if (checkusernameandpassword() == 1)
+    {
+      getunwantedgaslevel();
+      gettemphum();
+      line = loc_id + "\n" + String((int)unwantedgaslevel) + "\n" + String((int)humidity) + "\n" + String((int)temperature);
+      server.send(200, "text/plain", line);
+    } else
+    {
+      server.send(401, "text/plain", msg17);
+      Serial.println(msg18);
+    }
   });
   server.on("/get/unwantedgaslevel", []()
   {
-    Serial.println("* HTTP request received.");
+    Serial.println(msg13);
     blinkactled();
+    if (checkusernameandpassword() == 1)
+    {
     getunwantedgaslevel();
     line = String((int)unwantedgaslevel);
     server.send(200, "text/plain", line);
+  } else
+    {
+      server.send(401, "text/plain", msg17);
+      Serial.println(msg18);
+    }
   });
   server.on("/get/humidity", []()
   {
-    Serial.println("* HTTP request received.");
+    Serial.println(msg13);
     blinkactled();
+    if (checkusernameandpassword() == 1)
+    {
     gettemphum();
     line = String((int)humidity);
     server.send(200, "text/plain", line);
+  } else
+    {
+      server.send(401, "text/plain", msg17);
+      Serial.println(msg18);
+    }
   });
   server.on("/get/temperature", []()
   {
+    Serial.println(msg13);
     blinkactled();
+    if (checkusernameandpassword() == 1)
+    {
     gettemphum();
     line = String((int)temperature);
     server.send(200, "text/plain", line);
+  } else
+    {
+      server.send(401, "text/plain", msg17);
+      Serial.println(msg18);
+    }
   });
   server.begin();
-  Serial.println("* Webserver started.");
+  Serial.println(msg08);
 }
 
 // loop function
@@ -149,10 +207,10 @@ void getunwantedgaslevel()
   {
     prevtime1 = currtime1;
     adcvalue = analogRead(prt_sensor2);
-    unwantedgaslevel=adcvalue/(maxadcvalue/100);
+    unwantedgaslevel = adcvalue / (maxadcvalue / 100);
     if (unwantedgaslevel > 100)
     {
-      Serial.println("* E01: Failed to read CO2 sensor!");
+      Serial.println(msg14);
       unwantedgaslevel = 999;
       return;
     }
@@ -170,14 +228,28 @@ void gettemphum()
     temperature = dht.readTemperature(false);
     if (isnan(humidity) || isnan(temperature))
     {
-      Serial.println("* E02: Failed to read T/RH sensor!");
+      Serial.println(msg15);
+      Serial.print(msg16);
       digitalWrite(prt_relay, HIGH);
       delay(1000);
-      Serial.println("* Resetting T/RH sensor!");
+      Serial.println(msg16);
       digitalWrite(prt_relay, LOW);
+      Serial.println(msg08);
       temperature = 999;
       humidity = 999;
       return;
     }
+  }
+}
+
+// authentication
+int checkusernameandpassword()
+{
+  if (server.arg("username") == www_username && server.arg("password") == www_password)
+  {
+    return 1;
+  } else
+  {
+    return 0;
   }
 }
