@@ -20,49 +20,53 @@
 #define TYP_SENSOR1 DHT11
 
 // settings
-const String loc_id       = "TH11";
-const char* wifi_ssid     = "SzerafinGomba";
-const char* wifi_password = "halacskamacska";
-const String www_username = "username";
-const String www_password = "password";
+const String loc_id         = "TH11";
+const char* wifi_ssid       = "SzerafinGomba";
+const char* wifi_password   = "halacskamacska";
+const String www_username   = "username";
+const String www_password   = "password";
+const String allowedaddress = "192.168.1.11";
 
 // GPIO ports
-const int prt_led_act     = 2;
-const int prt_relay       = 0;
-const int prt_sensor1     = 12;
-const int prt_sensor2     = 0;
+const int prt_led_act       = 2;
+const int prt_relay         = 0;
+const int prt_sensor1       = 12;
+const int prt_sensor2       = 0;
 
 // messages
-const String msg01        = "MM7D v0.1 * Air quality measuring device";
-const String msg02        = "(C) 2020 Pozsar Zsolt";
-const String msg03        = "pozsar.zsolt@szerafingomba.hu";
-const String msg04        = "http://www.szerafingomba.hu/equipments/";
-const String msg05        = "* Initializing GPIO ports...";
-const String msg06        = "* Initializing sensors...";
-const String msg07        = "* Connecting to wireless network";
-const String msg08        = "OK";
-const String msg09        = "  my IP address:      ";
-const String msg10        = "  subnet mask:        ";
-const String msg11        = "  gateway IP address: ";
-const String msg12        = "* Starting webserver...";
-const String msg13        = "* HTTP request received.";
-const String msg14        = "* E01: Failed to read CO2 sensor!";
-const String msg15        = "* E02: Failed to read T/RH sensor!";
-const String msg16        = "* Resetting T/RH sensor...";
-const String msg17        = "Authentication error!";
-const String msg18        = "* E03: Authentication error!";
+const String msg01          = "MM7D v0.1 * Air quality measuring device";
+const String msg02          = "(C) 2020 Pozsar Zsolt";
+const String msg03          = "pozsar.zsolt@szerafingomba.hu";
+const String msg04          = "http://www.szerafingomba.hu/equipments/";
+const String msg05          = "* Initializing GPIO ports...";
+const String msg06          = "* Initializing sensors...";
+const String msg07          = "* Connecting to wireless network";
+const String msg08          = "done.";
+const String msg09          = "  my IP address:      ";
+const String msg10          = "  subnet mask:        ";
+const String msg11          = "  gateway IP address: ";
+const String msg12          = "* Starting webserver...";
+const String msg13          = "* HTTP request received from: ";
+const String msg14          = "* E01: Failed to read CO2 sensor!";
+const String msg15          = "* E02: Failed to read T/RH sensor!";
+const String msg16          = "* Resetting T/RH sensor...";
+const String msg17          = "Authentication error!";
+const String msg18          = "* E03: Authentication error!";
+const String msg19          = "Not allowed client IP address!";
+const String msg20          = "* E04: Not allowed client IP address!";
 
 // general constants
-const int maxadcvalue     = 1024;
-const long interval       = 2000;
+const int maxadcvalue       = 1024;
+const long interval         = 2000;
 
 // variables
 float humidity, temperature, unwantedgaslevel;
-int adcvalue              = 0;
+int adcvalue                = 0;
+String clientaddress;
 String line;
 String localipaddress;
-unsigned long prevtime1   = 0;
-unsigned long prevtime2   = 0;
+unsigned long prevtime1     = 0;
+unsigned long prevtime2     = 0;
 
 DHT dht(prt_sensor1, TYP_SENSOR1, 11);
 ESP8266WebServer server(80);
@@ -104,7 +108,7 @@ void setup(void)
   Serial.print(msg12);
   server.on("/", []()
   {
-    Serial.println(msg13);
+    Serial.println(msg13 + server.client().remoteIP().toString() + ".");
     blinkactled();
     line = "<html><head><title>" + msg01 + "</title></head>"
            "<body><b>" + msg01 + "</b>""<br>" + msg02 + " <a href=\"mailto:" + msg03 + "\">" + msg03 + "</a><br>"
@@ -122,63 +126,80 @@ void setup(void)
   });
   server.on("/get/all", []()
   {
-    Serial.println(msg13);
     blinkactled();
-    if (checkusernameandpassword() == 1)
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
     {
-      getunwantedgaslevel();
-      gettemphum();
-      line = loc_id + "\n" + String((int)unwantedgaslevel) + "\n" + String((int)humidity) + "\n" + String((int)temperature);
-      server.send(200, "text/plain", line);
+      if (checkusernameandpassword() == 1)
+      {
+        getunwantedgaslevel();
+        gettemphum();
+        line = loc_id + "\n" + String((int)unwantedgaslevel) + "\n" + String((int)humidity) + "\n" + String((int)temperature);
+        server.send(200, "text/plain", line);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
     } else
     {
-      server.send(401, "text/plain", msg17);
-      Serial.println(msg18);
+      server.send(401, "text/plain", msg19);
+      Serial.println(msg20);
     }
   });
   server.on("/get/unwantedgaslevel", []()
   {
-    Serial.println(msg13);
-    blinkactled();
-    if (checkusernameandpassword() == 1)
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
     {
-    getunwantedgaslevel();
-    line = String((int)unwantedgaslevel);
-    server.send(200, "text/plain", line);
-  } else
-    {
-      server.send(401, "text/plain", msg17);
-      Serial.println(msg18);
+      if (checkusernameandpassword() == 1)
+      {
+        getunwantedgaslevel();
+        line = String((int)unwantedgaslevel);
+        server.send(200, "text/plain", line);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
     }
   });
   server.on("/get/humidity", []()
   {
-    Serial.println(msg13);
-    blinkactled();
-    if (checkusernameandpassword() == 1)
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
     {
-    gettemphum();
-    line = String((int)humidity);
-    server.send(200, "text/plain", line);
-  } else
-    {
-      server.send(401, "text/plain", msg17);
-      Serial.println(msg18);
+      if (checkusernameandpassword() == 1)
+      {
+        gettemphum();
+        line = String((int)humidity);
+        server.send(200, "text/plain", line);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
     }
   });
   server.on("/get/temperature", []()
   {
-    Serial.println(msg13);
-    blinkactled();
-    if (checkusernameandpassword() == 1)
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
     {
-    gettemphum();
-    line = String((int)temperature);
-    server.send(200, "text/plain", line);
-  } else
-    {
-      server.send(401, "text/plain", msg17);
-      Serial.println(msg18);
+      if (checkusernameandpassword() == 1)
+      {
+        gettemphum();
+        line = String((int)temperature);
+        server.send(200, "text/plain", line);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
     }
   });
   server.begin();
