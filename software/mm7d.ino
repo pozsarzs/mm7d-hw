@@ -28,9 +28,13 @@ const String www_password   = "password";
 const String allowedaddress = "192.168.1.11";
 
 // GPIO ports
-const int prt_led_act       = 2;
+const int prt_led_blue      = 2;
+const int prt_led_green     = 99;
+const int prt_led_red       = 99;
+const int prt_led_yellow    = 99;
 const int prt_relay         = 0;
 const int prt_sensor1       = 12;
+// ADC input
 const int prt_sensor2       = 0;
 
 // messages
@@ -54,6 +58,13 @@ const String msg17          = "Authentication error!";
 const String msg18          = "* E03: Authentication error!";
 const String msg19          = "Not allowed client IP address!";
 const String msg20          = "* E04: Not allowed client IP address!";
+const String msg21          = "* Red";
+const String msg22          = "* Green";
+const String msg23          = "* Yellow";
+const String msg24          = " LED is switched ";
+const String msg25          = "on.";
+const String msg26          = "off.";
+const String msg27          = "Done.";
 
 // general constants
 const int maxadcvalue       = 1024;
@@ -82,9 +93,15 @@ void setup(void)
   Serial.println(msg02 + " <" + msg03 + ">");
   // initializing ports
   Serial.print(msg05);
-  pinMode(prt_led_act, OUTPUT);
+  pinMode(prt_led_blue, OUTPUT);
+  pinMode(prt_led_green, OUTPUT);
+  pinMode(prt_led_red, OUTPUT);
+  pinMode(prt_led_yellow, OUTPUT);
   pinMode(prt_relay, OUTPUT);
-  digitalWrite(prt_led_act, LOW);
+  digitalWrite(prt_led_blue, LOW);
+  digitalWrite(prt_led_green, LOW);
+  digitalWrite(prt_led_red, LOW);
+  digitalWrite(prt_led_yellow, LOW);
   digitalWrite(prt_relay, LOW);
   Serial.println(msg08);
   // initializing sensors
@@ -109,24 +126,31 @@ void setup(void)
   server.on("/", []()
   {
     Serial.println(msg13 + server.client().remoteIP().toString() + ".");
-    blinkactled();
+    blinkblueled();
     line = "<html><head><title>" + msg01 + "</title></head>"
            "<body><b>" + msg01 + "</b>""<br>" + msg02 + " <a href=\"mailto:" + msg03 + "\">" + msg03 + "</a><br>"
            "Homepage: <a href=\"" + msg04 + "\">" + msg04 + "</a><br><br>"
            "Location: " + loc_id + "<br>"
-           "<hr><b>Plain text data pages:</b><br><br>"
+           "<hr><b>Plain text data and control pages:</b><br><br>"
            "<table border=\"0\" cellpadding=\"5\">"
            "<tr><td><a href=\"http://" + localipaddress + "/get/all\">http://" + localipaddress + "/get/all</a></td><td>All data with location ID</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/get/unwantedgaslevel\">http://" + localipaddress + "/get/unwantedgaslevel</a></td><td>Relative level of unwanted gases in %</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/get/humidity\">http://" + localipaddress + "/get/humidity</a></td><td>Relative humidity in %</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/get/temperature\">http://" + localipaddress + "/get/temperature</a></td><td>Temperature in &deg;C</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/all/off\">http://" + localipaddress + "/set/all/off</a></td><td>Switch off all LEDs</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/greenled/off\">http://" + localipaddress + "/set/greenled/off</a></td><td>Switch off green LED</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/greenled/on\">http://" + localipaddress + "/set/greenled/on</a></td><td>Switch on green LED</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/redled/off\">http://" + localipaddress + "/set/redled/off</a></td><td>Switch off red LED</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/redled/on\">http://" + localipaddress + "/set/redled/on</a></td><td>Switch on red LED</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/yellowled/off\">http://" + localipaddress + "/set/yellowled/off</a></td><td>Switch off yellow LED</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/yellowled/on\">http://" + localipaddress + "/set/yellowled/on</a></td><td>Switch on yellow LED</td></tr>"
            "</table><br>Use <i>username</i> and <i>password</i> arguments!<br><body></html>";
     server.send(200, "text/html", line);
     delay(100);
   });
   server.on("/get/all", []()
   {
-    blinkactled();
+    blinkblueled();
     clientaddress = server.client().remoteIP().toString();
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
@@ -202,6 +226,162 @@ void setup(void)
       }
     }
   });
+  server.on("/set/all/off", []()
+  {
+    blinkblueled();
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
+    {
+      if (checkusernameandpassword() == 1)
+      {
+        greenled(0);
+        redled(0);
+        yellowled(0);
+        server.send(200, "text/plain", msg27);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
+    } else
+    {
+      server.send(401, "text/plain", msg19);
+      Serial.println(msg20);
+    }
+  });
+  server.on("/set/greenled/off", []()
+  {
+    blinkblueled();
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
+    {
+      if (checkusernameandpassword() == 1)
+      {
+        greenled(0);
+        server.send(200, "text/plain", msg27);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
+    } else
+    {
+      server.send(401, "text/plain", msg19);
+      Serial.println(msg20);
+    }
+  });
+  server.on("/set/greenled/on", []()
+  {
+    blinkblueled();
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
+    {
+      if (checkusernameandpassword() == 1)
+      {
+        greenled(1);
+        server.send(200, "text/plain", msg27);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
+    } else
+    {
+      server.send(401, "text/plain", msg19);
+      Serial.println(msg20);
+    }
+  });
+  server.on("/set/redled/off", []()
+  {
+    blinkblueled();
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
+    {
+      if (checkusernameandpassword() == 1)
+      {
+        redled(0);
+        server.send(200, "text/plain", msg27);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
+    } else
+    {
+      server.send(401, "text/plain", msg19);
+      Serial.println(msg20);
+    }
+  });
+  server.on("/set/redled/on", []()
+  {
+    blinkblueled();
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
+    {
+      if (checkusernameandpassword() == 1)
+      {
+        redled(1);
+        server.send(200, "text/plain", msg27);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
+    } else
+    {
+      server.send(401, "text/plain", msg19);
+      Serial.println(msg20);
+    }
+  });
+  server.on("/set/yellowled/off", []()
+  {
+    blinkblueled();
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
+    {
+      if (checkusernameandpassword() == 1)
+      {
+        yellowled(0);
+        server.send(200, "text/plain", msg27);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
+    } else
+    {
+      server.send(401, "text/plain", msg19);
+      Serial.println(msg20);
+    }
+  });
+  server.on("/set/yellowled/on", []()
+  {
+    blinkblueled();
+    clientaddress = server.client().remoteIP().toString();
+    Serial.println(msg13 + clientaddress + ".");
+    if (clientaddress == allowedaddress)
+    {
+      if (checkusernameandpassword() == 1)
+      {
+        yellowled(1);
+        server.send(200, "text/plain", msg27);
+      } else
+      {
+        server.send(401, "text/plain", msg17);
+        Serial.println(msg18);
+      }
+    } else
+    {
+      server.send(401, "text/plain", msg19);
+      Serial.println(msg20);
+    }
+  });
   server.begin();
   Serial.println(msg08);
 }
@@ -212,12 +392,54 @@ void loop(void)
   server.handleClient();
 }
 
-// blink blue "ACT" LED
-void blinkactled()
+// blink blue LED
+void blinkblueled()
 {
-  digitalWrite(prt_led_act, HIGH);
+  digitalWrite(prt_led_blue, HIGH);
   delay(500);
-  digitalWrite(prt_led_act, LOW);
+  digitalWrite(prt_led_blue, LOW);
+}
+
+// switch on/off green LED
+void greenled(int i)
+{
+  if (i = 0)
+  {
+    digitalWrite(prt_led_green, LOW);
+    Serial.println(msg21 + msg24 + msg26);
+  } else
+  {
+    digitalWrite(prt_led_green, HIGH);
+    Serial.println(msg21 + msg24 + msg25);
+  }
+}
+
+// switch on/off red LED
+void redled(int i)
+{
+  if (i = 0)
+  {
+    digitalWrite(prt_led_red, LOW);
+    Serial.println(msg22 + msg24 + msg26);
+  } else
+  {
+    digitalWrite(prt_led_red, HIGH);
+    Serial.println(msg22 + msg24 + msg25);
+  }
+}
+
+// switch on/off yellow LED
+void yellowled(int i)
+{
+  if (i = 0)
+  {
+    digitalWrite(prt_led_yellow, LOW);
+    Serial.println(msg23 + msg24 + msg26);
+  } else
+  {
+    digitalWrite(prt_led_yellow, HIGH);
+    Serial.println(msg23 + msg24 + msg25);
+  }
 }
 
 // get air quality
