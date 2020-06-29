@@ -28,10 +28,11 @@ const String www_password   = "password";
 const String allowedaddress = "192.168.1.11";
 
 // GPIO ports
+const int prt_buzzer        = 14;
 const int prt_led_blue      = 2;
-const int prt_led_green     = 99;
-const int prt_led_red       = 99;
-const int prt_led_yellow    = 99;
+const int prt_led_green     = 4;
+const int prt_led_red       = 5;
+const int prt_led_yellow    = 13;
 const int prt_relay         = 0;
 const int prt_sensor1       = 12;
 // ADC input
@@ -58,8 +59,8 @@ const String msg17          = "Authentication error!";
 const String msg18          = "* E03: Authentication error!";
 const String msg19          = "Not allowed client IP address!";
 const String msg20          = "* E04: Not allowed client IP address!";
-const String msg21          = "* Red";
-const String msg22          = "* Green";
+const String msg21          = "* Green";
+const String msg22          = "* Red";
 const String msg23          = "* Yellow";
 const String msg24          = " LED is switched ";
 const String msg25          = "on.";
@@ -93,6 +94,7 @@ void setup(void)
   Serial.println(msg02 + " <" + msg03 + ">");
   // initializing ports
   Serial.print(msg05);
+  pinMode(prt_buzzer, OUTPUT);
   pinMode(prt_led_blue, OUTPUT);
   pinMode(prt_led_green, OUTPUT);
   pinMode(prt_led_red, OUTPUT);
@@ -128,15 +130,15 @@ void setup(void)
     Serial.println(msg13 + server.client().remoteIP().toString() + ".");
     blinkblueled();
     line = "<html><head><title>" + msg01 + "</title></head>"
-           "<body><b>" + msg01 + "</b>""<br>" + msg02 + " <a href=\"mailto:" + msg03 + "\">" + msg03 + "</a><br>"
+           "<body bgcolor=\"#e2f4fd\"><h2>" + msg01 + "</h2>""<br>" + msg02 + " <a href=\"mailto:" + msg03 + "\">" + msg03 + "</a><br>"
            "Homepage: <a href=\"" + msg04 + "\">" + msg04 + "</a><br><br>"
            "Location: " + loc_id + "<br>"
-           "<hr><b>Plain text data and control pages:</b><br><br>"
+           "<hr><h3>Plain text data and control pages:</h3><br><br>"
            "<table border=\"0\" cellpadding=\"5\">"
-           "<tr><td><a href=\"http://" + localipaddress + "/get/all\">http://" + localipaddress + "/get/all</a></td><td>All data with location ID</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/get/unwantedgaslevel\">http://" + localipaddress + "/get/unwantedgaslevel</a></td><td>Relative level of unwanted gases in %</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/get/humidity\">http://" + localipaddress + "/get/humidity</a></td><td>Relative humidity in %</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/get/temperature\">http://" + localipaddress + "/get/temperature</a></td><td>Temperature in &deg;C</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/all\">http://" + localipaddress + "/get/all</a></td><td>Get all data with location ID</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/unwantedgaslevel\">http://" + localipaddress + "/get/unwantedgaslevel</a></td><td>Get relative level of unwanted gases in %</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/humidity\">http://" + localipaddress + "/get/humidity</a></td><td>Get relative humidity in %</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/temperature\">http://" + localipaddress + "/get/temperature</a></td><td>Get temperature in &deg;C</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/set/all/off\">http://" + localipaddress + "/set/all/off</a></td><td>Switch off all LEDs</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/set/greenled/off\">http://" + localipaddress + "/set/greenled/off</a></td><td>Switch off green LED</td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/set/greenled/on\">http://" + localipaddress + "/set/greenled/on</a></td><td>Switch on green LED</td></tr>"
@@ -169,6 +171,9 @@ void setup(void)
     } else
     {
       server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
       Serial.println(msg20);
     }
   });
@@ -188,6 +193,13 @@ void setup(void)
         server.send(401, "text/plain", msg17);
         Serial.println(msg18);
       }
+    } else
+    {
+      server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
+      Serial.println(msg20);
     }
   });
   server.on("/get/humidity", []()
@@ -206,6 +218,13 @@ void setup(void)
         server.send(401, "text/plain", msg17);
         Serial.println(msg18);
       }
+    } else
+    {
+      server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
+      Serial.println(msg20);
     }
   });
   server.on("/get/temperature", []()
@@ -224,6 +243,13 @@ void setup(void)
         server.send(401, "text/plain", msg17);
         Serial.println(msg18);
       }
+    } else
+    {
+      server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
+      Serial.println(msg20);
     }
   });
   server.on("/set/all/off", []()
@@ -247,6 +273,9 @@ void setup(void)
     } else
     {
       server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
       Serial.println(msg20);
     }
   });
@@ -269,6 +298,9 @@ void setup(void)
     } else
     {
       server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
       Serial.println(msg20);
     }
   });
@@ -291,6 +323,9 @@ void setup(void)
     } else
     {
       server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
       Serial.println(msg20);
     }
   });
@@ -313,6 +348,9 @@ void setup(void)
     } else
     {
       server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
       Serial.println(msg20);
     }
   });
@@ -335,6 +373,9 @@ void setup(void)
     } else
     {
       server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
       Serial.println(msg20);
     }
   });
@@ -357,6 +398,9 @@ void setup(void)
     } else
     {
       server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
       Serial.println(msg20);
     }
   });
@@ -379,11 +423,15 @@ void setup(void)
     } else
     {
       server.send(401, "text/plain", msg19);
+      beep();
+      beep();
+      beep();
       Serial.println(msg20);
     }
   });
   server.begin();
   Serial.println(msg08);
+  beep();
 }
 
 // loop function
@@ -403,7 +451,7 @@ void blinkblueled()
 // switch on/off green LED
 void greenled(int i)
 {
-  if (i = 0)
+  if (i == 0)
   {
     digitalWrite(prt_led_green, LOW);
     Serial.println(msg21 + msg24 + msg26);
@@ -417,7 +465,7 @@ void greenled(int i)
 // switch on/off red LED
 void redled(int i)
 {
-  if (i = 0)
+  if (i == 0)
   {
     digitalWrite(prt_led_red, LOW);
     Serial.println(msg22 + msg24 + msg26);
@@ -431,7 +479,7 @@ void redled(int i)
 // switch on/off yellow LED
 void yellowled(int i)
 {
-  if (i = 0)
+  if (i == 0)
   {
     digitalWrite(prt_led_yellow, LOW);
     Serial.println(msg23 + msg24 + msg26);
@@ -453,6 +501,7 @@ void getunwantedgaslevel()
     unwantedgaslevel = adcvalue / (maxadcvalue / 100);
     if (unwantedgaslevel > 100)
     {
+      beep();
       Serial.println(msg14);
       unwantedgaslevel = 999;
       return;
@@ -471,6 +520,7 @@ void gettemphum()
     temperature = dht.readTemperature(false);
     if (isnan(humidity) || isnan(temperature))
     {
+      beep();
       Serial.println(msg15);
       Serial.print(msg16);
       digitalWrite(prt_relay, HIGH);
@@ -492,6 +542,17 @@ int checkusernameandpassword()
     return 1;
   } else
   {
+    beep();
+    beep();
     return 0;
   }
+}
+
+// beep
+void beep()
+{
+  tone(prt_buzzer, 880);
+  delay (100);
+  noTone(prt_buzzer);
+  delay (100);
 }

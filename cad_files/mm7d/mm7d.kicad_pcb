@@ -5,10 +5,10 @@
     (no_connects 0)
     (area 0 0 0 0)
     (thickness 1.6)
-    (drawings 0)
+    (drawings 6)
     (tracks 0)
     (zones 0)
-    (modules 0)
+    (modules 4)
     (nets 1)
   )
 
@@ -102,5 +102,72 @@
     (uvia_dia 0.3)
     (uvia_drill 0.1)
   )
+
+  (module Mounting_Holes:MountingHole_3.2mm_M3_ISO14580 (layer F.Cu) (tedit 5EF8ECAA) (tstamp 5EFC0226)
+    (at 99.06 114.046)
+    (descr "Mounting Hole 3.2mm, no annular, M3, ISO14580")
+    (tags "mounting hole 3.2mm no annular m3 iso14580")
+    (fp_text reference REF** (at 0 -3.75) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value MountingHole_3.2mm_M3_ISO14580 (at 0 3.75) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_circle (center 0 0) (end 2.75 0) (layer Cmts.User) (width 0.15))
+    (fp_circle (center 0 0) (end 3 0) (layer F.CrtYd) (width 0.05))
+    (pad 1 np_thru_hole circle (at 0 0) (size 3.2 3.2) (drill 3.2) (layers *.Cu *.Mask))
+  )
+
+  (module Mounting_Holes:MountingHole_3.2mm_M3_ISO14580 (layer F.Cu) (tedit 5EF8ECAA) (tstamp 5EFC0220)
+    (at 147.828 114.046)
+    (descr "Mounting Hole 3.2mm, no annular, M3, ISO14580")
+    (tags "mounting hole 3.2mm no annular m3 iso14580")
+    (fp_text reference REF** (at 0 -3.75) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value MountingHole_3.2mm_M3_ISO14580 (at 0 3.75) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_circle (center 0 0) (end 2.75 0) (layer Cmts.User) (width 0.15))
+    (fp_circle (center 0 0) (end 3 0) (layer F.CrtYd) (width 0.05))
+    (pad 1 np_thru_hole circle (at 0 0) (size 3.2 3.2) (drill 3.2) (layers *.Cu *.Mask))
+  )
+
+  (module Mounting_Holes:MountingHole_3.2mm_M3_ISO14580 (layer F.Cu) (tedit 5EF8ECAA) (tstamp 5EFC0213)
+    (at 147.828 54.61)
+    (descr "Mounting Hole 3.2mm, no annular, M3, ISO14580")
+    (tags "mounting hole 3.2mm no annular m3 iso14580")
+    (fp_text reference REF** (at 0 -3.75) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value MountingHole_3.2mm_M3_ISO14580 (at 0 3.75) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_circle (center 0 0) (end 2.75 0) (layer Cmts.User) (width 0.15))
+    (fp_circle (center 0 0) (end 3 0) (layer F.CrtYd) (width 0.05))
+    (pad 1 np_thru_hole circle (at 0 0) (size 3.2 3.2) (drill 3.2) (layers *.Cu *.Mask))
+  )
+
+  (module Mounting_Holes:MountingHole_3.2mm_M3_ISO14580 (layer F.Cu) (tedit 5EF8ECAA) (tstamp 5EFC01F8)
+    (at 99.06 54.61)
+    (descr "Mounting Hole 3.2mm, no annular, M3, ISO14580")
+    (tags "mounting hole 3.2mm no annular m3 iso14580")
+    (fp_text reference REF** (at 0 -3.75) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value MountingHole_3.2mm_M3_ISO14580 (at 0 3.75) (layer F.Fab) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_circle (center 0 0) (end 2.75 0) (layer Cmts.User) (width 0.15))
+    (fp_circle (center 0 0) (end 3 0) (layer F.CrtYd) (width 0.05))
+    (pad 1 np_thru_hole circle (at 0 0) (size 3.2 3.2) (drill 3.2) (layers *.Cu *.Mask))
+  )
+
+  (gr_line (start 94.996 50.8) (end 99.06 50.8) (angle 90) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 94.996 118.364) (end 94.996 50.8) (angle 90) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 151.892 118.364) (end 94.996 118.364) (angle 90) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 151.892 117.856) (end 151.892 118.364) (angle 90) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 151.892 50.8) (end 151.892 117.856) (angle 90) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 99.06 50.8) (end 151.892 50.8) (angle 90) (layer Edge.Cuts) (width 0.15))
 
 )
