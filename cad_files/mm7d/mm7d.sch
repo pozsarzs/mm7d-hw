@@ -44,7 +44,7 @@ Comp "Pozsar Zsolt - http://www.szerafingomba.hu"
 Comment1 ""
 Comment2 ""
 Comment3 ""
-Comment4 "Draw no.: 59/10/2"
+Comment4 "Draw no.: 59/12/2"
 $EndDescr
 $Comp
 L Adafruit_Huzzah_Breakout U1

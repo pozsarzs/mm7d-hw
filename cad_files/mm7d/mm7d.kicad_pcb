@@ -3,7 +3,7 @@
   (general
     (links 0)
     (no_connects 0)
-    (area 0 0 0 0)
+    (area 85.502857 49.885 161.385143 118.871)
     (thickness 1.6)
     (drawings 6)
     (tracks 0)
@@ -18,7 +18,7 @@
     (date 2020-06-20)
     (rev 200620)
     (company "Pozsar Zsolt - http://www.szerafingomba.hu")
-    (comment 4 "Draw no.: 59/10/3")
+    (comment 4 "Draw no.: 59/12/3")
   )
 
   (layers
