@@ -30,10 +30,9 @@ const String allowedaddress = "192.168.1.11";
 // GPIO ports
 const int prt_buzzer        = 14;
 const int prt_led_blue      = 2;
-const int prt_led_green     = 4;
-const int prt_led_red       = 5;
-const int prt_led_yellow    = 13;
-const int prt_relay         = 0;
+const int prt_led_green     = 0;
+const int prt_led_red       = 4;
+const int prt_led_yellow    = 5;
 const int prt_sensor1       = 12;
 // ADC input
 const int prt_sensor2       = 0;
@@ -54,7 +53,7 @@ const String msg12          = "* Starting webserver...";
 const String msg13          = "* HTTP request received from: ";
 const String msg14          = "* E01: Failed to read CO2 sensor!";
 const String msg15          = "* E02: Failed to read T/RH sensor!";
-const String msg16          = "* Resetting T/RH sensor...";
+const String msg16          = "";
 const String msg17          = "Authentication error!";
 const String msg18          = "* E03: Authentication error!";
 const String msg19          = "Not allowed client IP address!";
@@ -99,12 +98,10 @@ void setup(void)
   pinMode(prt_led_green, OUTPUT);
   pinMode(prt_led_red, OUTPUT);
   pinMode(prt_led_yellow, OUTPUT);
-  pinMode(prt_relay, OUTPUT);
   digitalWrite(prt_led_blue, LOW);
   digitalWrite(prt_led_green, LOW);
   digitalWrite(prt_led_red, LOW);
   digitalWrite(prt_led_yellow, LOW);
-  digitalWrite(prt_relay, LOW);
   Serial.println(msg08);
   // initializing sensors
   Serial.print(msg06);
@@ -522,11 +519,6 @@ void gettemphum()
     {
       beep();
       Serial.println(msg15);
-      Serial.print(msg16);
-      digitalWrite(prt_relay, HIGH);
-      delay(1000);
-      digitalWrite(prt_relay, LOW);
-      Serial.println(msg08);
       temperature = 999;
       humidity = 999;
       return;
