@@ -20,12 +20,12 @@
 #define TYP_SENSOR1 DHT11
 
 // settings
-const String loc_id         = "TH11";
-const char* wifi_ssid       = "SzerafinGomba";
-const char* wifi_password   = "halacskamacska";
-const String www_username   = "username";
-const String www_password   = "password";
-const String allowedaddress = "192.168.1.11";
+const String swversion      = "0.1";
+const char* wifi_ssid       = "";
+const char* wifi_password   = "";
+const String www_username   = "";
+const String www_password   = "";
+const String allowedaddress = "";
 
 // GPIO ports
 const int prt_buzzer        = 14;
@@ -38,8 +38,8 @@ const int prt_sensor1       = 12;
 const int prt_sensor2       = 0;
 
 // messages
-const String msg01          = "MM7D v0.1 * Air quality measuring device";
-const String msg02          = "(C) 2020 Pozsar Zsolt";
+const String msg01          = "MM7D * Air quality measuring device";
+const String msg02          = "Copyright (C) 2020";
 const String msg03          = "pozsar.zsolt@szerafingomba.hu";
 const String msg04          = "http://www.szerafingomba.hu/equipments/";
 const String msg05          = "* Initializing GPIO ports...";
@@ -53,7 +53,7 @@ const String msg12          = "* Starting webserver...";
 const String msg13          = "* HTTP request received from: ";
 const String msg14          = "* E01: Failed to read CO2 sensor!";
 const String msg15          = "* E02: Failed to read T/RH sensor!";
-const String msg16          = "";
+const String msg16          = "MM7D";
 const String msg17          = "Authentication error!";
 const String msg18          = "* E03: Authentication error!";
 const String msg19          = "Not allowed client IP address!";
@@ -65,6 +65,8 @@ const String msg24          = " LED is switched ";
 const String msg25          = "on.";
 const String msg26          = "off.";
 const String msg27          = "Done.";
+const String msg28          = "Pozsar Zsolt";
+const String msg29          = "  device MAC address: ";
 
 // general constants
 const int maxadcvalue       = 1024;
@@ -74,6 +76,7 @@ const long interval         = 2000;
 float humidity, temperature, unwantedgaslevel;
 int adcvalue                = 0;
 String clientaddress;
+String devicemacaddress;
 String line;
 String localipaddress;
 unsigned long prevtime1     = 0;
@@ -89,8 +92,8 @@ void setup(void)
   Serial.begin(115200);
   Serial.println("");
   Serial.println("");
-  Serial.println(msg01);
-  Serial.println(msg02 + " <" + msg03 + ">");
+  Serial.println(msg01 + " * v" + swversion );
+  Serial.println(msg02 +  " " + msg28 + " <" + msg03 + ">");
   // initializing ports
   Serial.print(msg05);
   pinMode(prt_buzzer, OUTPUT);
@@ -117,6 +120,8 @@ void setup(void)
   }
   Serial.println(msg08);
   localipaddress = WiFi.localIP().toString();
+  devicemacaddress = WiFi.macAddress();
+  Serial.println(msg29 + devicemacaddress);
   Serial.println(msg09 + localipaddress);
   Serial.println(msg10 + WiFi.subnetMask().toString());
   Serial.println(msg11 + WiFi.gatewayIP().toString());
@@ -127,24 +132,35 @@ void setup(void)
     Serial.println(msg13 + server.client().remoteIP().toString() + ".");
     blinkblueled();
     line = "<html><head><title>" + msg01 + "</title></head>"
-           "<body bgcolor=\"#e2f4fd\"><h2>" + msg01 + "</h2>""<br>" + msg02 + " <a href=\"mailto:" + msg03 + "\">" + msg03 + "</a><br>"
-           "Homepage: <a href=\"" + msg04 + "\">" + msg04 + "</a><br><br>"
-           "Location: " + loc_id + "<br>"
-           "<hr><h3>Plain text data and control pages:</h3><br><br>"
+           "<body bgcolor=\"#e2f4fd\"><h2>" + msg01 + "</h2>""<br>"
+           "Software version: v" + swversion + "<br>"
+           "<hr><h3>Plain text data and control pages:</h3><br>"
            "<table border=\"0\" cellpadding=\"5\">"
-           "<tr><td><a href=\"http://" + localipaddress + "/get/all\">http://" + localipaddress + "/get/all</a></td><td>Get all data with location ID</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/get/unwantedgaslevel\">http://" + localipaddress + "/get/unwantedgaslevel</a></td><td>Get relative level of unwanted gases in %</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/get/humidity\">http://" + localipaddress + "/get/humidity</a></td><td>Get relative humidity in %</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/get/temperature\">http://" + localipaddress + "/get/temperature</a></td><td>Get temperature in &deg;C</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/set/all/off\">http://" + localipaddress + "/set/all/off</a></td><td>Switch off all LEDs</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/set/greenled/off\">http://" + localipaddress + "/set/greenled/off</a></td><td>Switch off green LED</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/set/greenled/on\">http://" + localipaddress + "/set/greenled/on</a></td><td>Switch on green LED</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/set/redled/off\">http://" + localipaddress + "/set/redled/off</a></td><td>Switch off red LED</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/set/redled/on\">http://" + localipaddress + "/set/redled/on</a></td><td>Switch on red LED</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/set/yellowled/off\">http://" + localipaddress + "/set/yellowled/off</a></td><td>Switch off yellow LED</td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/set/yellowled/on\">http://" + localipaddress + "/set/yellowled/on</a></td><td>Switch on yellow LED</td></tr>"
-           "</table><br>Use <i>username</i> and <i>password</i> arguments!<br><body></html>";
+           "<tr><td><a href=\"http://" + localipaddress + "/version\">http://" + localipaddress + "/version</a></td><td>Get software name and version</td></tr>"
+           "<tr><td colspan=\"2\">&nbsp;</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/all\">http://" + localipaddress + "/get/all</a></td><td>Get all data<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/humidity\">http://" + localipaddress + "/get/humidity</a></td><td>Get relative humidity in %<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/temperature\">http://" + localipaddress + "/get/temperature</a></td><td>Get temperature in &deg;C<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/get/unwantedgaslevel\">http://" + localipaddress + "/get/unwantedgaslevel</a></td><td>Get relative level of unwanted gases in %<sup>*</sup></td></tr>"
+           "<tr><td colspan=\"2\">&nbsp;</td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/all/off\">http://" + localipaddress + "/set/all/off</a></td><td>Switch off all LEDs<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/greenled/off\">http://" + localipaddress + "/set/greenled/off</a></td><td>Switch off green LED<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/greenled/on\">http://" + localipaddress + "/set/greenled/on</a></td><td>Switch on green LED<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/redled/off\">http://" + localipaddress + "/set/redled/off</a></td><td>Switch off red LED<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/redled/on\">http://" + localipaddress + "/set/redled/on</a></td><td>Switch on red LED<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/yellowled/off\">http://" + localipaddress + "/set/yellowled/off</a></td><td>Switch off yellow LED<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/yellowled/on\">http://" + localipaddress + "/set/yellowled/on</a></td><td>Switch on yellow LED<sup>*</sup></td></tr>"
+           "</table><br><sup>*</sup>Use <i>username</i> and <i>password</i> arguments!<br>"
+           "<hr><center>" + msg02 + " <a href=\"mailto:" + msg03 + "\">" + msg28 + "</a> - <a href=\"" + msg04 + "\">Homepage</a><center><br><body></html>";
     server.send(200, "text/html", line);
+    delay(100);
+  });
+  server.on("/version", []()
+  {
+    Serial.println(msg13 + server.client().remoteIP().toString() + ".");
+    blinkblueled();
+    line = msg16 + "\n" + swversion;
+    server.send(200, "text/plain", line);
     delay(100);
   });
   server.on("/get/all", []()
@@ -158,7 +174,7 @@ void setup(void)
       {
         getunwantedgaslevel();
         gettemphum();
-        line = loc_id + "\n" + String((int)unwantedgaslevel) + "\n" + String((int)humidity) + "\n" + String((int)temperature);
+        line = String((int)unwantedgaslevel) + "\n" + String((int)humidity) + "\n" + String((int)temperature);
         server.send(200, "text/plain", line);
       } else
       {
