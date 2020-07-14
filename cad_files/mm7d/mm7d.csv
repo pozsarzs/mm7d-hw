@@ -1,0 +1,33 @@
+Source,/home/pozsarzs/Letöltések/mm7d/mm7d.sch
+Kicad Rev,Eeschema 4.0.5+dfsg1-4
+Generated Date,2020. júl. 14., kedd, 20:44:47 CEST
+
+Title,MM7D Air quality measuring device
+Company,Pozsar Zsolt - http://www.szerafingomba.hu
+Revision,200620
+Date Issue,2020-06-20
+Comment,Draw no.: 59/12/2
+
+Reference,Value,Library,Library Ref
+U103,DHT11,mm7d-cache,pzs_devices:DHT11
+R103,470,mm7d-cache,device:R
+R106,4.7k,mm7d-cache,device:R
+U102,MQ-135M,mm7d-cache,pzs_devices:MQ-135M
+R108,9.1k,mm7d-cache,device:R
+R107,39k,mm7d-cache,device:R
+R104,470,mm7d-cache,device:R
+R105,470,mm7d-cache,device:R
+R102,470,mm7d-cache,device:R
+C101,470u,mm7d-cache,device:CP_Small
+D102,white,mm7d-cache,pzs_devices:LED-CIRCLE
+D103,blue,mm7d-cache,pzs_devices:LED-CIRCLE
+D104,green,mm7d-cache,pzs_devices:LED-CIRCLE
+D105,yellow,mm7d-cache,pzs_devices:LED-CIRCLE
+D106,red,mm7d-cache,pzs_devices:LED-CIRCLE
+C102,2.2u,mm7d-cache,device:CP_Small
+R101,470,mm7d-cache,device:R
+U101-JP5,CONN_01X10,conn,CONN_01X10
+U101-JP4,CONN_01X10,conn,CONN_01X10
+P101,CONN_01X02,conn,CONN_01X02
+P102,CONN_01X02,conn,CONN_01X02
+D101,1N4001,device,D

@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/pozsarzs/Letöltések/mm7d/mm7d.sch</source>
+    <date>2020. júl. 14., kedd, 20:44:47 CEST</date>
+    <tool>Eeschema 4.0.5+dfsg1-4</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>MM7D Air quality measuring device</title>
+        <company>Pozsar Zsolt - http://www.szerafingomba.hu</company>
+        <rev>200620</rev>
+        <date>2020-06-20</date>
+        <source>mm7d.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value="Draw no.: 59/12/2"/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U103">
+      <value>DHT11</value>
+      <footprint>Socket_Strips:Socket_Strip_Straight_1x04</footprint>
+      <libsource lib="mm7d-cache" part="pzs_devices:DHT11"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EEE15C4</tstamp>
+    </comp>
+    <comp ref="R103">
+      <value>470</value>
+      <footprint>Resistors_THT:Resistor_Horizontal_RM7mm</footprint>
+      <libsource lib="mm7d-cache" part="device:R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EEE416B</tstamp>
+    </comp>
+    <comp ref="R106">
+      <value>4.7k</value>
+      <footprint>Resistors_THT:Resistor_Horizontal_RM7mm</footprint>
+      <libsource lib="mm7d-cache" part="device:R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EEE8D51</tstamp>
+    </comp>
+    <comp ref="U102">
+      <value>MQ-135M</value>
+      <footprint>Socket_Strips:Socket_Strip_Straight_1x04</footprint>
+      <libsource lib="mm7d-cache" part="pzs_devices:MQ-135M"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EEEA952</tstamp>
+    </comp>
+    <comp ref="R108">
+      <value>9.1k</value>
+      <footprint>Resistors_THT:Resistor_Horizontal_RM10mm</footprint>
+      <libsource lib="mm7d-cache" part="device:R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EEEB0AE</tstamp>
+    </comp>
+    <comp ref="R107">
+      <value>39k</value>
+      <footprint>Resistors_THT:Resistor_Horizontal_RM10mm</footprint>
+      <libsource lib="mm7d-cache" part="device:R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EEEB91E</tstamp>
+    </comp>
+    <comp ref="R104">
+      <value>470</value>
+      <footprint>Resistors_THT:Resistor_Horizontal_RM7mm</footprint>
+      <libsource lib="mm7d-cache" part="device:R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EF77CF6</tstamp>
+    </comp>
+    <comp ref="R105">
+      <value>470</value>
+      <footprint>Resistors_THT:Resistor_Horizontal_RM7mm</footprint>
+      <libsource lib="mm7d-cache" part="device:R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EF787E4</tstamp>
+    </comp>
+    <comp ref="R102">
+      <value>470</value>
+      <footprint>Resistors_THT:Resistor_Horizontal_RM7mm</footprint>
+      <libsource lib="mm7d-cache" part="device:R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EF7A4FE</tstamp>
+    </comp>
+    <comp ref="C101">
+      <value>470u</value>
+      <footprint>Capacitors_THT:C_Radial_D8_L11.5_P3.5</footprint>
+      <libsource lib="mm7d-cache" part="device:CP_Small"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EF7C17E</tstamp>
+    </comp>
+    <comp ref="D102">
+      <value>white</value>
+      <footprint>LEDs:LED-3MM</footprint>
+      <libsource lib="mm7d-cache" part="pzs_devices:LED-CIRCLE"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EF86B1D</tstamp>
+    </comp>
+    <comp ref="D103">
+      <value>blue</value>
+      <footprint>LEDs:LED-3MM</footprint>
+      <libsource lib="mm7d-cache" part="pzs_devices:LED-CIRCLE"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EF8710B</tstamp>
+    </comp>
+    <comp ref="D104">
+      <value>green</value>
+      <footprint>LEDs:LED-3MM</footprint>
+      <libsource lib="mm7d-cache" part="pzs_devices:LED-CIRCLE"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EF87176</tstamp>
+    </comp>
+    <comp ref="D105">
+      <value>yellow</value>
+      <footprint>LEDs:LED-3MM</footprint>
+      <libsource lib="mm7d-cache" part="pzs_devices:LED-CIRCLE"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EF871E6</tstamp>
+    </comp>
+    <comp ref="D106">
+      <value>red</value>
+      <footprint>LEDs:LED-3MM</footprint>
+      <libsource lib="mm7d-cache" part="pzs_devices:LED-CIRCLE"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EF8725D</tstamp>
+    </comp>
+    <comp ref="C102">
+      <value>2.2u</value>
+      <footprint>Capacitors_THT:C_Rect_L7_W4.5_P5</footprint>
+      <libsource lib="mm7d-cache" part="device:CP_Small"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5EFA265C</tstamp>
+    </comp>
+    <comp ref="R101">
+      <value>470</value>
+      <footprint>Resistors_THT:Resistor_Horizontal_RM7mm</footprint>
+      <libsource lib="mm7d-cache" part="device:R"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F021C4E</tstamp>
+    </comp>
+    <comp ref="U101-JP5">
+      <value>CONN_01X10</value>
+      <footprint>Socket_Strips:Socket_Strip_Straight_1x10</footprint>
+      <libsource lib="conn" part="CONN_01X10"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F0DE95D</tstamp>
+    </comp>
+    <comp ref="U101-JP4">
+      <value>CONN_01X10</value>
+      <footprint>Socket_Strips:Socket_Strip_Straight_1x10</footprint>
+      <libsource lib="conn" part="CONN_01X10"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F0DEBCD</tstamp>
+    </comp>
+    <comp ref="P101">
+      <value>CONN_01X02</value>
+      <footprint>Socket_Strips:Socket_Strip_Straight_1x02</footprint>
+      <libsource lib="conn" part="CONN_01X02"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F0DF004</tstamp>
+    </comp>
+    <comp ref="P102">
+      <value>CONN_01X02</value>
+      <footprint>Socket_Strips:Socket_Strip_Straight_1x02</footprint>
+      <libsource lib="conn" part="CONN_01X02"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F0DF119</tstamp>
+    </comp>
+    <comp ref="D101">
+      <value>1N4001</value>
+      <libsource lib="device" part="D"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5F0E9A5B</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="conn" part="CONN_01X02">
+      <description>Connector, single row, 01x02</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X02</fp>
+        <fp>Pin_Header_Angled_1X02</fp>
+        <fp>Socket_Strip_Straight_1X02</fp>
+        <fp>Socket_Strip_Angled_1X02</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_01X10">
+      <description>Connector, single row, 01x10</description>
+      <footprints>
+        <fp>Pin_Header_Straight_1X10</fp>
+        <fp>Pin_Header_Angled_1X10</fp>
+        <fp>Socket_Strip_Straight_1X10</fp>
+        <fp>Socket_Strip_Angled_1X10</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X10</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+        <pin num="7" name="P7" type="passive"/>
+        <pin num="8" name="P8" type="passive"/>
+        <pin num="9" name="P9" type="passive"/>
+        <pin num="10" name="P10" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="D">
+      <description>Diode</description>
+      <footprints>
+        <fp>Diode_*</fp>
+        <fp>D-*</fp>
+        <fp>*SingleDiode</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>D_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="mm7d-cache" part="device:CP_Small">
+      <footprints>
+        <fp>CP_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">device:CP_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="mm7d-cache" part="device:R">
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">device:R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="mm7d-cache" part="pzs_devices:DHT11">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">pzs_devices:DHT11</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC" type="power_in"/>
+        <pin num="2" name="IO" type="BiDi"/>
+        <pin num="3" name="NC" type="BiDi"/>
+        <pin num="4" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="mm7d-cache" part="pzs_devices:LED-CIRCLE">
+      <footprints>
+        <fp>LED*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">pzs_devices:LED-CIRCLE</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="mm7d-cache" part="pzs_devices:MQ-135M">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">pzs_devices:MQ-135M</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC" type="power_in"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="DO" type="output"/>
+        <pin num="4" name="AO" type="output"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="device">
+      <uri>/usr/share/kicad/library/device.lib</uri>
+    </library>
+    <library logical="conn">
+      <uri>/usr/share/kicad/library/conn.lib</uri>
+    </library>
+    <library logical="mm7d-cache">
+      <uri>/home/pozsarzs/Letöltések/mm7d/mm7d-cache.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="GND">
+      <node ref="U102" pin="2"/>
+      <node ref="U103" pin="4"/>
+      <node ref="D101" pin="2"/>
+      <node ref="P102" pin="1"/>
+      <node ref="P101" pin="1"/>
+      <node ref="U101-JP4" pin="10"/>
+      <node ref="C101" pin="2"/>
+      <node ref="R108" pin="2"/>
+      <node ref="D105" pin="1"/>
+      <node ref="D103" pin="1"/>
+      <node ref="D104" pin="1"/>
+      <node ref="D102" pin="1"/>
+      <node ref="D106" pin="1"/>
+    </net>
+    <net code="2" name="Net-(D105-Pad2)">
+      <node ref="R104" pin="2"/>
+      <node ref="D105" pin="2"/>
+    </net>
+    <net code="3" name="Net-(D106-Pad2)">
+      <node ref="D106" pin="2"/>
+      <node ref="R105" pin="2"/>
+    </net>
+    <net code="4" name="Net-(C102-Pad2)">
+      <node ref="C102" pin="2"/>
+      <node ref="P102" pin="2"/>
+    </net>
+    <net code="5" name="Net-(C102-Pad1)">
+      <node ref="C102" pin="1"/>
+      <node ref="U101-JP4" pin="5"/>
+    </net>
+    <net code="6" name="Net-(D104-Pad2)">
+      <node ref="R103" pin="2"/>
+      <node ref="D104" pin="2"/>
+    </net>
+    <net code="7" name="Net-(R106-Pad2)">
+      <node ref="R106" pin="2"/>
+      <node ref="U101-JP4" pin="6"/>
+      <node ref="U103" pin="2"/>
+    </net>
+    <net code="8" name="+3V3">
+      <node ref="U101-JP5" pin="3"/>
+      <node ref="R106" pin="1"/>
+      <node ref="R101" pin="2"/>
+      <node ref="U103" pin="1"/>
+    </net>
+    <net code="9" name="Net-(R107-Pad2)">
+      <node ref="R107" pin="2"/>
+      <node ref="R108" pin="1"/>
+      <node ref="U101-JP4" pin="2"/>
+    </net>
+    <net code="10" name="Net-(R107-Pad1)">
+      <node ref="R107" pin="1"/>
+      <node ref="U102" pin="4"/>
+    </net>
+    <net code="11" name="Net-(R102-Pad2)">
+      <node ref="U101-JP5" pin="5"/>
+      <node ref="R102" pin="2"/>
+    </net>
+    <net code="12" name="Net-(R104-Pad1)">
+      <node ref="U101-JP5" pin="7"/>
+      <node ref="R104" pin="1"/>
+    </net>
+    <net code="13" name="Net-(R105-Pad1)">
+      <node ref="R105" pin="1"/>
+      <node ref="U101-JP5" pin="8"/>
+    </net>
+    <net code="14" name="Net-(D103-Pad2)">
+      <node ref="D103" pin="2"/>
+      <node ref="R102" pin="1"/>
+    </net>
+    <net code="15" name="Net-(U101-JP4-Pad9)">
+      <node ref="U101-JP4" pin="9"/>
+    </net>
+    <net code="16" name="Net-(U101-JP5-Pad9)">
+      <node ref="U101-JP5" pin="9"/>
+    </net>
+    <net code="17" name="Net-(U101-JP5-Pad10)">
+      <node ref="U101-JP5" pin="10"/>
+    </net>
+    <net code="18" name="Net-(U101-JP4-Pad1)">
+      <node ref="U101-JP4" pin="1"/>
+    </net>
+    <net code="19" name="Net-(U101-JP4-Pad3)">
+      <node ref="U101-JP4" pin="3"/>
+    </net>
+    <net code="20" name="Net-(U101-JP4-Pad4)">
+      <node ref="U101-JP4" pin="4"/>
+    </net>
+    <net code="21" name="Net-(U101-JP4-Pad7)">
+      <node ref="U101-JP4" pin="7"/>
+    </net>
+    <net code="22" name="Net-(D102-Pad2)">
+      <node ref="R101" pin="1"/>
+      <node ref="D102" pin="2"/>
+    </net>
+    <net code="23" name="Net-(R103-Pad1)">
+      <node ref="U101-JP5" pin="6"/>
+      <node ref="R103" pin="1"/>
+    </net>
+    <net code="24" name="Net-(U101-JP5-Pad1)">
+      <node ref="U101-JP5" pin="1"/>
+    </net>
+    <net code="25" name="Net-(U101-JP5-Pad2)">
+      <node ref="U101-JP5" pin="2"/>
+    </net>
+    <net code="26" name="Net-(U101-JP5-Pad4)">
+      <node ref="U101-JP5" pin="4"/>
+    </net>
+    <net code="27" name="Net-(U103-Pad3)">
+      <node ref="U103" pin="3"/>
+    </net>
+    <net code="28" name="Net-(U102-Pad3)">
+      <node ref="U102" pin="3"/>
+    </net>
+    <net code="29" name="+5V">
+      <node ref="C101" pin="1"/>
+      <node ref="U101-JP4" pin="8"/>
+      <node ref="D101" pin="1"/>
+      <node ref="P101" pin="2"/>
+      <node ref="U102" pin="1"/>
+    </net>
+  </nets>
+</export>
