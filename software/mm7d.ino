@@ -34,6 +34,7 @@ const int prt_led_green     = 0;
 const int prt_led_red       = 4;
 const int prt_led_yellow    = 5;
 const int prt_sensor1       = 12;
+
 // ADC input
 const int prt_sensor2       = 0;
 
@@ -88,13 +89,13 @@ ESP8266WebServer server(80);
 // initializing function
 void setup(void)
 {
-  // setting serial port
+  // set serial port
   Serial.begin(115200);
   Serial.println("");
   Serial.println("");
   Serial.println(msg01 + " * v" + swversion );
   Serial.println(msg02 +  " " + msg28 + " <" + msg03 + ">");
-  // initializing ports
+  // initialize ports
   Serial.print(msg05);
   pinMode(prt_buzzer, OUTPUT);
   pinMode(prt_led_blue, OUTPUT);
@@ -106,7 +107,7 @@ void setup(void)
   digitalWrite(prt_led_red, LOW);
   digitalWrite(prt_led_yellow, LOW);
   Serial.println(msg08);
-  // initializing sensors
+  // initialize sensors
   Serial.print(msg06);
   dht.begin();
   Serial.println(msg08);
