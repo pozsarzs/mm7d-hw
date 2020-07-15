@@ -1,0 +1,19 @@
+Source,/home/pozsarzs/Git/mm7d/cad_files/connectors/connectors.sch
+Kicad Rev,Eeschema 4.0.5+dfsg1-4
+Generated Date,2020. júl. 15., szerda, 18:52:02 CEST
+
+Title,MM7D Air quality measuring device
+Company,Pozsar Zsolt - http://www.szerafingomba.hu
+Revision,200620
+Date Issue,2020-06-20
+Comment,Connectors
+Comment,Draw no.: 59/12/6
+
+Reference,Value,Library,Library Ref
+P1,SN10M 5.5/2.1,conn,BNC
+C1,100n,device,C
+P101,CONN_01X02,conn,CONN_01X02
+P102,CONN_01X02,conn,CONN_01X02
+P2,DB9F,conn,DB9
+U101-JP1,CONN_01X06,conn,CONN_01X06
+LS1,Piezo speaker,device,Speaker_Crystal
