@@ -1,5 +1,14 @@
-Licence of hardware documentation is Creative Commons Attribution-NonCommercial
-4.0 International Public License. You can read this in LICENCE-hw file.
+MM7D hardware:
+  Licence of hardware documentation is Creative Commons Attribution-
+  NonCommercial 4.0 International Public License. You can read this in
+  LICENCE-hw file.
 
-Licence of software is European Union Public Licence v1.1 You can read this
-in LICENCE-sw file.
+MM7D software:
+  Licence of software is European Union Public Licence v1.1. You can read this
+  in LICENCE-sw file.
+
+Adafruit Unified Sensor library:
+  Apache License v2.0, you can read this in LICENSE.txt in its package.
+
+DHT sensor library:
+  Other license, you can read this in license.txt in its package.

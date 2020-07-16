@@ -2,8 +2,8 @@
 # +----------------------------------------------------------------------------+
 # | MM7D v0.1 * Air quality measuring device                                   |
 # | Copyright (C) 2020 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>            |
-# | clonelibrary                                                               |
-# | Clone requested libraries from Github                                      |
+# | clone                                                                      |
+# | Clone libraries from Github                                                |
 # +----------------------------------------------------------------------------+
 
 git clone https://github.com/adafruit/Adafruit_Sensor.git

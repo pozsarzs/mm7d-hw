@@ -28,7 +28,7 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:connectors-cache
+LIBS:wiring-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -38,7 +38,7 @@ Title "MM7D Air quality measuring device"
 Date "2020-06-20"
 Rev "200620"
 Comp "Pozsar Zsolt - http://www.szerafingomba.hu"
-Comment1 "Connectors"
+Comment1 "Internal wiring"
 Comment2 ""
 Comment3 ""
 Comment4 "Draw no.: 59/12/6"
@@ -167,4 +167,6 @@ Text Notes 4450 2800 0    60   ~ 0
 5V DC
 Text Notes 6450 2800 0    60   ~ 0
 Console
+Text Notes 4700 3100 0    60   ~ 0
++
 $EndSCHEMATC

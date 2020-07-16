@@ -10,3 +10,7 @@ Copyright (C) 2020 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
 - Software licence: EUPL v1.1
 - Software language: en
 - Homepage: <http://www.szerafingomba.hu/equipments/>
+
+External libraries in package
+- Adafruit Unified Sensor v1.1.4 by Adafruit Industries
+- DHT sensor library v1.3.10 by Adafruit Industries

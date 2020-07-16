@@ -1,4 +1,4 @@
-Source,/home/pozsarzs/Git/mm7d/cad_files/connectors/connectors.sch
+Source,/home/pozsarzs/Git/mm7d/cad_files/wiring/wiring.sch
 Kicad Rev,Eeschema 4.0.5+dfsg1-4
 Generated Date,2020. júl. 15., szerda, 18:52:02 CEST
 
@@ -6,7 +6,7 @@ Title,MM7D Air quality measuring device
 Company,Pozsar Zsolt - http://www.szerafingomba.hu
 Revision,200620
 Date Issue,2020-06-20
-Comment,Connectors
+Comment,Internal wiring
 Comment,Draw no.: 59/12/6
 
 Reference,Value,Library,Library Ref
