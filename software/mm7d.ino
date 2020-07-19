@@ -24,7 +24,6 @@ const String swversion      = "0.1";
 const char* wifi_ssid       = "";
 const char* wifi_password   = "";
 const String www_username   = "";
-const String www_password   = "";
 const String allowedaddress = "";
 
 // GPIO ports
@@ -68,6 +67,8 @@ const String msg26          = "off.";
 const String msg27          = "Done.";
 const String msg28          = "Pozsar Zsolt";
 const String msg29          = "  device MAC address: ";
+const String msg30          = "Page not found!";
+const String msg31          = "* E05: Page not found!";
 
 // general constants
 const int maxadcvalue       = 1024;
@@ -128,6 +129,7 @@ void setup(void)
   Serial.println(msg11 + WiFi.gatewayIP().toString());
   // start webserver
   Serial.print(msg12);
+  server.onNotFound(handleNotFound);
   server.on("/", []()
   {
     Serial.println(msg13 + server.client().remoteIP().toString() + ".");
@@ -151,7 +153,7 @@ void setup(void)
            "<tr><td><a href=\"http://" + localipaddress + "/set/redled/on\">http://" + localipaddress + "/set/redled/on</a></td><td>Switch on red LED<sup>*</sup></td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/set/yellowled/off\">http://" + localipaddress + "/set/yellowled/off</a></td><td>Switch off yellow LED<sup>*</sup></td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/set/yellowled/on\">http://" + localipaddress + "/set/yellowled/on</a></td><td>Switch on yellow LED<sup>*</sup></td></tr>"
-           "</table><br><sup>*</sup>Use <i>username</i> and <i>password</i> arguments!<br>"
+           "</table><br><sup>*</sup>Use <i>username</i> argument!<br>"
            "<hr><center>" + msg02 + " <a href=\"mailto:" + msg03 + "\">" + msg28 + "</a> - <a href=\"" + msg04 + "\">Homepage</a><center><br><body></html>";
     server.send(200, "text/html", line);
     delay(100);
@@ -171,7 +173,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         getunwantedgaslevel();
         gettemphum();
@@ -197,7 +199,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         getunwantedgaslevel();
         line = String((int)unwantedgaslevel);
@@ -222,7 +224,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         gettemphum();
         line = String((int)humidity);
@@ -247,7 +249,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         gettemphum();
         line = String((int)temperature);
@@ -273,7 +275,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         greenled(0);
         redled(0);
@@ -300,7 +302,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         greenled(0);
         server.send(200, "text/plain", msg27);
@@ -325,7 +327,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         greenled(1);
         server.send(200, "text/plain", msg27);
@@ -350,7 +352,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         redled(0);
         server.send(200, "text/plain", msg27);
@@ -375,7 +377,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         redled(1);
         server.send(200, "text/plain", msg27);
@@ -400,7 +402,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         yellowled(0);
         server.send(200, "text/plain", msg27);
@@ -425,7 +427,7 @@ void setup(void)
     Serial.println(msg13 + clientaddress + ".");
     if (clientaddress == allowedaddress)
     {
-      if (checkusernameandpassword() == 1)
+      if (checkusername() == 1)
       {
         yellowled(1);
         server.send(200, "text/plain", msg27);
@@ -452,6 +454,12 @@ void setup(void)
 void loop(void)
 {
   server.handleClient();
+}
+
+void handleNotFound()
+{
+  server.send(404, "text/plain", msg30);
+  Serial.println(msg31);
 }
 
 // blink blue LED
@@ -544,9 +552,9 @@ void gettemphum()
 }
 
 // authentication
-int checkusernameandpassword()
+int checkusername()
 {
-  if (server.arg("username") == www_username && server.arg("password") == www_password)
+  if (server.arg("username") == www_username)
   {
     return 1;
   } else

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <body bgcolor="#e2f4fd">
+    <script type="text/javascript">
+      function goToPage() {
+        var page = document.querySelector('input[name = "page"]:checked').value;
+        var username = document.getElementById('username').value;
+        var ipaddress = document.getElementById('ipaddress').value;
+        window.open ("http://" + ipaddress + page + "?username=" + username + "&password=" + password, target='right');
+      }
+    </script>
+    <center><h2>MM6D test page</h2></center><br>
+    <br>
+    <fieldset>
+      <legend>&nbsp;Controller&nbsp;</legend>
+      <label for="ipaddress">IP address of controller:</label><br>
+      <input type="text" id="ipaddress" /><br>
+      <label for="username">Username:</label><br>
+      <input type="text" id="username" /><br>
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>&nbsp;Get status&nbsp;</legend>
+      <input type="radio" id="page7" name="page" value="/version">
+      <label for="page7">Get name and version of controller</label><br>
+      <br>
+      <input type="radio" id="page8" name="page" value="/get/all">
+      <label for="page8">Get all status</label><br>
+      <input type="radio" id="page9" name="page" value="/get/alarm">
+      <label for="page9">Get alarm status</label><br>
+      <input type="radio" id="page10" name="page" value="/get/operationmode">
+      <label for="page10">Get status of operation mode switch</label><br>
+      <input type="radio" id="page11" name="page" value="/get/manualswitch">
+      <label for="page11">Get status of manual mode</label><br>
+      <input type="radio" id="page12" name="page" value="/get/protection">
+      <label for="page12">Get status of overcurrent protection</label><br>
+      <input type="submit" value="Submit" onclick="goToPage();" />
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>&nbsp;Turn on/off outputs&nbsp;</legend>
+      <input type="radio" id="page0" name="page" value="/set/all/off">
+      <label for="page0">Switch off all outputs</label><br>
+      <input type="radio" id="page1" name="page" value="/set/lamp/on">
+      <label for="page1">Switch on lamp</label><br>
+      <input type="radio" id="page2" name="page" value="/set/lamp/off">
+      <label for="page2">Switch off lamp</label><br>
+      <input type="radio" id="page3" name="page" value="/set/ventilator/on">
+      <label for="page3">Switch on ventilator</label><br>
+      <input type="radio" id="page4" name="page" value="/set/ventilator/off">
+      <label for="page4">Switch off ventilator</label><br>
+      <input type="radio" id="page5" name="page" value="/set/heater/on">
+      <label for="page5">Switch on heater</label><br>
+      <input type="radio" id="page6" name="page" value="/set/heater/off">
+      <label for="page6">Switch off heater</label><br>
+      <br>
+      <input type="submit" value="Submit" onclick="goToPage();" />
+    </fieldset>
+  </body>
+</html>
