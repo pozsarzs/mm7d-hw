@@ -149,10 +149,10 @@ void setup(void)
            "<tr><td><a href=\"http://" + localipaddress + "/set/all/off\">http://" + localipaddress + "/set/all/off</a></td><td>Switch off all LEDs<sup>*</sup></td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/set/greenled/off\">http://" + localipaddress + "/set/greenled/off</a></td><td>Switch off green LED<sup>*</sup></td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/set/greenled/on\">http://" + localipaddress + "/set/greenled/on</a></td><td>Switch on green LED<sup>*</sup></td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/set/redled/off\">http://" + localipaddress + "/set/redled/off</a></td><td>Switch off red LED<sup>*</sup></td></tr>"
-           "<tr><td><a href=\"http://" + localipaddress + "/set/redled/on\">http://" + localipaddress + "/set/redled/on</a></td><td>Switch on red LED<sup>*</sup></td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/set/yellowled/off\">http://" + localipaddress + "/set/yellowled/off</a></td><td>Switch off yellow LED<sup>*</sup></td></tr>"
            "<tr><td><a href=\"http://" + localipaddress + "/set/yellowled/on\">http://" + localipaddress + "/set/yellowled/on</a></td><td>Switch on yellow LED<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/redled/off\">http://" + localipaddress + "/set/redled/off</a></td><td>Switch off red LED<sup>*</sup></td></tr>"
+           "<tr><td><a href=\"http://" + localipaddress + "/set/redled/on\">http://" + localipaddress + "/set/redled/on</a></td><td>Switch on red LED<sup>*</sup></td></tr>"
            "</table><br><sup>*</sup>Use <i>username</i> argument!<br>"
            "<hr><center>" + msg02 + " <a href=\"mailto:" + msg03 + "\">" + msg28 + "</a> - <a href=\"" + msg04 + "\">Homepage</a><center><br><body></html>";
     server.send(200, "text/html", line);
