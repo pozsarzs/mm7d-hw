@@ -2,15 +2,13 @@
 <html>
   <body bgcolor="#e2f4fd">
     <script type="text/javascript">
-      function goToPage() {
+      function OpenPage() {
+        var ipaddress = document.getElementById('ipaddress').value;
         var page = document.querySelector('input[name = "page"]:checked').value;
         var username = document.getElementById('username').value;
-        var ipaddress = document.getElementById('ipaddress').value;
-        window.open ("http://" + ipaddress + page + "?username=" + username + "&password=" + password, target='right');
+        window.open ("http://" + ipaddress + page + "?username=" + username, target='bottom');
       }
     </script>
-    <center><h2>MM7D test page</h2></center><br>
-    <br>
     <fieldset>
       <legend>&nbsp;Controller&nbsp;</legend>
       <label for="ipaddress">IP address of controller:</label><br>
@@ -20,12 +18,17 @@
     </fieldset>
     <br>
     <fieldset>
-      <legend>&nbsp;Get status&nbsp;</legend>
+      <legend>&nbsp;Get controller's data&nbsp;</legend>
       <input type="radio" id="page0" name="page" value="/version">
       <label for="page0">Get name and version of controller</label><br>
       <br>
+      <input type="submit" value="Submit" onclick="OpenPage();" />
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>&nbsp;Get status&nbsp;</legend>
       <input type="radio" id="page1" name="page" value="/get/all">
-      <label for="page1">Get all status</label><br>
+      <label for="page1"><b>Get all status</b></label><br>
       <input type="radio" id="page2" name="page" value="/get/humidity">
       <label for="page2">Get relative humidity in %</label><br>
       <input type="radio" id="page3" name="page" value="/get/temperature">
@@ -33,13 +36,13 @@
       <input type="radio" id="page4" name="page" value="/get/unwantedgaslevel">
       <label for="page4">Get relative level of unwanted gases in %</label><br>
       <br>
-      <input type="submit" value="Submit" onclick="goToPage();" />
+      <input type="submit" value="Submit" onclick="OpenPage();" />
     </fieldset>
     <br>
     <fieldset>
-      <legend>&nbsp;Turn on/off outputs&nbsp;</legend>
+      <legend>&nbsp;Turn on/off LEDs&nbsp;</legend>
       <input type="radio" id="page5" name="page" value="/set/all/off">
-      <label for="page5">Switch off all LEDs</label><br>
+      <label for="page5"><b>Switch off all LEDs</b></label><br>
       <input type="radio" id="page6" name="page" value="/set/greenled/off">
       <label for="page6">Switch on green LED</label><br>
       <input type="radio" id="page7" name="page" value="/set/greenled/on">
@@ -53,7 +56,7 @@
       <input type="radio" id="page11" name="page" value="/set/redled/on">
       <label for="page11">Switch off red LED</label><br>
       <br>
-      <input type="submit" value="Submit" onclick="goToPage();" />
+      <input type="submit" value="Submit" onclick="OpenPage();" />
     </fieldset>
   </body>
 </html>

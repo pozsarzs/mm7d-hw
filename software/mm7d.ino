@@ -20,7 +20,6 @@
 #define TYP_SENSOR1 DHT11
 
 // settings
-const String swversion      = "0.1";
 const char* wifi_ssid       = "";
 const char* wifi_password   = "";
 const String www_username   = "";
@@ -73,6 +72,7 @@ const String msg31          = "* E05: Page not found!";
 // general constants
 const int maxadcvalue       = 1024;
 const long interval         = 2000;
+const String swversion      = "0.1";
 
 // variables
 float humidity, temperature, unwantedgaslevel;
