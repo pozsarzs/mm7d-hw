@@ -2,15 +2,23 @@ Short information
 -----------------
 MM7D * Air quality measuring device
 Copyright (C) 2020 Pozsár Zsolt <pozsar.zsolt@szerafingomba.hu>
-- Documentation version: 1.0
-- Documentation licence: CC-BY-NC-4.0
-- Documentation language: en
-- Hardware version: v200620
-- Software version: v0.1
-- Software licence: EUPL v1.1
-- Software language: en
-- Homepage: <http://www.szerafingomba.hu/equipments/>
+Homepage: <http://www.szerafingomba.hu/equipments/>
+
+Documentation
+ - version:             1.0
+ - licence:             CC-BY-NC-4.0
+ - language:            en
+
+Hardware
+ - version:             v200620
+ - architecture:        xtensa
+ - operation system:    -
+
+Software
+ - version:             v0.1
+ - licence:             EUPL v1.1
+ - language:            en
 
 External libraries in package
-- Adafruit Unified Sensor v1.1.4 by Adafruit Industries
-- DHT sensor library v1.3.10 by Adafruit Industries
+ - Adafruit Unified Sensor v1.1.4 by Adafruit Industries
+ - DHT sensor library v1.3.10 by Adafruit Industries
