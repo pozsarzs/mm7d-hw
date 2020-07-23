@@ -1,3 +1,5 @@
+*** WARNING! It is not yet useable, because it is under development. WARNING ***
+
 Short information
 -----------------
 MM7D * Air quality measuring device
@@ -22,3 +24,5 @@ Software
 External libraries in package
  - Adafruit Unified Sensor v1.1.4 by Adafruit Industries
  - DHT sensor library v1.3.10 by Adafruit Industries
+
+*** WARNING! It is not yet useable, because it is under development. WARNING ***
