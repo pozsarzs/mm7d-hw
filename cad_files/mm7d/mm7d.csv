@@ -1,11 +1,12 @@
-Source,/home/pozsarzs/Letöltések/mm7d/mm7d.sch
+Source,/home/pozsarzs/Git/mm7d/cad_files/mm7d/mm7d.sch
 Kicad Rev,Eeschema 4.0.5+dfsg1-4
-Generated Date,2020. júl. 14., kedd, 20:44:47 CEST
+Generated Date,2020. júl. 24., péntek, 21:23:25 CEST
 
 Title,MM7D Air quality measuring device
 Company,Pozsar Zsolt - http://www.szerafingomba.hu
 Revision,200620
 Date Issue,2020-06-20
+Comment,Printed circuit board
 Comment,Draw no.: 59/12/2
 
 Reference,Value,Library,Library Ref
