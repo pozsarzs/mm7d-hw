@@ -22,6 +22,7 @@ GitHub: <https://github.com/pozsarzs/mm7d>
  - version:            v0.1
  - language:           en
  - licence:            EUPL v1.1
+ - user interface:     CUI via serial console and webpage
 
 **External libraries in package**
 
