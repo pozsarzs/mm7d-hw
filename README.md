@@ -5,7 +5,7 @@ GitHub: <https://github.com/pozsarzs/mm7d-hw>
 
 **Documentation**
 
-- version:             1.0
+- version:             2.0
 - language:            en
 - licence:             CC-BY-NC-4.0
 
