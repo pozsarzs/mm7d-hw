@@ -1,5 +1,5 @@
 *.kicad_pcb linguist-detectable=true
 *.sch linguist-detectable=true
 *.pro linguist-detectable=false
-_documents/* linguist-documentation
-_pictures/* linguist-documentation
+documents/* linguist-documentation
+pictures/* linguist-documentation
