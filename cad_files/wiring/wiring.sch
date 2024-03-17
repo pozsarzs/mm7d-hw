@@ -1,50 +1,20 @@
-EESchema Schematic File Version 2
-LIBS:power
-LIBS:device
-LIBS:transistors
-LIBS:conn
-LIBS:linear
-LIBS:regul
-LIBS:74xx
-LIBS:cmos4000
-LIBS:adc-dac
-LIBS:memory
-LIBS:xilinx
-LIBS:microcontrollers
-LIBS:dsp
-LIBS:microchip
-LIBS:analog_switches
-LIBS:motorola
-LIBS:texas
-LIBS:intel
-LIBS:audio
-LIBS:interface
-LIBS:digital-audio
-LIBS:philips
-LIBS:display
-LIBS:cypress
-LIBS:siliconi
-LIBS:opto
-LIBS:atmel
-LIBS:contrib
-LIBS:valves
-LIBS:wiring-cache
-EELAYER 25 0
+EESchema Schematic File Version 4
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "MM7D Air quality measuring device"
-Date "2020-06-20"
-Rev "200620"
-Comp "Pozsar Zsolt - http://www.szerafingomba.hu"
+Title "MM7D RH/T measuring device"
+Date "2024-03-17"
+Rev "231006"
+Comp "Pozsar Zsolt - http://www.pozsarzs.hu"
 Comment1 "Internal wiring"
 Comment2 ""
 Comment3 ""
-Comment4 "Draw no.: 59/12/6"
+Comment4 ""
 $EndDescr
 $Comp
-L BNC P1
+L wiring-rescue:BNC P1
 U 1 1 5F0F33AE
 P 4550 3100
 F 0 "P1" H 4550 3300 50  0000 C CNN
@@ -55,7 +25,7 @@ F 3 "" H 4550 3100 50  0000 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L C C1
+L wiring-rescue:C C1
 U 1 1 5F0F33F6
 P 4750 3550
 F 0 "C1" V 4550 3500 50  0000 L CNN
@@ -66,7 +36,7 @@ F 3 "" H 4750 3550 50  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L CONN_01X02 P101
+L wiring-rescue:CONN_01X02 P101
 U 1 1 5F0F3457
 P 4600 4450
 F 0 "P101" V 4750 4450 50  0000 C CNN
@@ -77,7 +47,7 @@ F 3 "" H 4600 4450 50  0000 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L CONN_01X02 P102
+L wiring-rescue:CONN_01X02 P102
 U 1 1 5F0F3486
 P 5600 4450
 F 0 "P102" V 5750 4450 50  0000 C CNN
@@ -88,7 +58,7 @@ F 3 "" H 5600 4450 50  0000 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L DB9 P2
+L wiring-rescue:DB9 P2
 U 1 1 5F0F34AD
 P 6650 3100
 F 0 "P2" V 6650 3750 50  0000 C CNN
@@ -99,7 +69,7 @@ F 3 "" H 6650 3100 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L CONN_01X06 U101-JP1
+L wiring-rescue:CONN_01X06 U101-JP1
 U 1 1 5F0F34CC
 P 6800 4450
 F 0 "U101-JP1" V 6950 4450 50  0000 C CNN
@@ -110,7 +80,7 @@ F 3 "" H 6800 4450 50  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Speaker_Crystal LS1
+L wiring-rescue:Speaker_Crystal LS1
 U 1 1 5F0F34FF
 P 5550 3750
 F 0 "LS1" V 5775 3775 50  0000 R CNN
@@ -121,7 +91,7 @@ F 3 "" H 5515 3700 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	4550 3300 4550 4250
+	4550 3300 4550 3550
 Wire Wire Line
 	4600 3550 4550 3550
 Connection ~ 4550 3550
@@ -130,7 +100,7 @@ Wire Wire Line
 Wire Wire Line
 	4950 4200 4650 4200
 Wire Wire Line
-	4950 3100 4950 4200
+	4950 3100 4950 3550
 Wire Wire Line
 	4950 3550 4900 3550
 Wire Wire Line
@@ -169,4 +139,8 @@ Text Notes 6450 2800 0    60   ~ 0
 Console
 Text Notes 4700 3100 0    60   ~ 0
 +
+Wire Wire Line
+	4550 3550 4550 4250
+Wire Wire Line
+	4950 3550 4950 4200
 $EndSCHEMATC

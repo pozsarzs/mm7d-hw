@@ -1,14 +1,14 @@
-**MM7D * Air quality measuring device**  
-Copyright (C) 2020-2021 Pozsár Zsolt <pozsarzs@gmail.com>  
+## MM7D * RH/T measuring device  
+Copyright (C) 2023 Pozsár Zsolt <pozsarzs@gmail.com>  
 Homepage: <http://www.pozsarzs.hu>  
 GitHub: <https://github.com/pozsarzs/mm7d-hw>
 
-**Documentation**
+#### Documentation
+|features               |             |
+|:----------------------|-------------|
+|hardware version       |v231006      |
+|documentation language |en           |
+|documentation licence  |CC-BY-NC-4.0 |
 
-- version:             3.0
-- language:            en
-- licence:             CC-BY-NC-4.0
-
-**Hardware**
-
- - version:            v200620
+#### Not own documentation in the package
+ - PP42 box by [Supertronic S.A.](https://supertronic.com/)

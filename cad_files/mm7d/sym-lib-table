@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name mm7d-rescue)(type Legacy)(uri ${KIPRJMOD}/mm7d-rescue.lib)(options "")(descr ""))
+  (lib (name pzs_others)(type Legacy)(uri ${KIPRJMOD}/pzs_others.lib)(options "")(descr ""))
+  (lib (name pzs_devices)(type Legacy)(uri ${KIPRJMOD}/pzs_devices.lib)(options "")(descr ""))
+)
